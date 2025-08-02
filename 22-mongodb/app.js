@@ -29,7 +29,7 @@ async function main() {
   // { name: "supriadi", email: "supriadi@email.com" },
   //  { name: "bagas", email: "bagas@email.com" },
   //   ]);
-  //   console.log("Inserted documents =>", insertResult);
+  console.log("Inserted documents =>", insertResult);
 
   //return all document in a collection
   const findResult = await collection.find({}).toArray();

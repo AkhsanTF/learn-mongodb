@@ -1,0 +1,72 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Contact List</h2>
+      <!-- a function to pop up a flash message if event is success -->
+      <% if (added || deleted || edited) { %>
+      <div
+        style="position: absolute; top: 80px; right: 20px"
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+      >
+        <strong>Success!</strong>
+        Data contact <% if (added) { %>added<% } else if (deleted) { %>deleted
+        <%} else { %>edited<% } %>!
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      <% } %>
+
+      <a href="/contact/add" class="btn btn-primary mb-2">Add Contact</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (contacts.length===0) { %>
+          <tr>
+            <td colspan="4">
+              <div class="alert alert-danger fw-bold" role="alert">
+                Your data contact is still empty.
+              </div>
+            </td>
+          </tr>
+          <% } %> <% contacts.forEach((contact,i) => {i++ %>
+          <tr>
+            <th scope="row"><%= i %></th>
+            <td><%= contact.name %></td>
+            <td><%= contact.phone %></td>
+            <td>
+              <a
+                href="/contact/<%= contact.name %>"
+                class="btn btn-success badge rounded-pill"
+                ><i class="bi bi-info-circle"></i> detail</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // function to remove pop up message after 3 seconds
+  setTimeout(() => {
+    const alert = document.querySelector(".alert");
+    if (alert) {
+      alert.classList.remove("show");
+      alert.classList.add("hide");
+    }
+  }, 3000);
+</script>
